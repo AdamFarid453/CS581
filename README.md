@@ -1,11 +1,11 @@
 # CS581 #
 ## Online Social Networks ##
 
-__Purpose of this course will be to__
+Purpose of this course will be to
 
-__* Work with real-life online social networks __
+* Work with real-life online social networks
 * Design algorithms for social networks
-__* Program with online social networks APIs
-__* Understand dynamic properties of online social networks
-__* Analyze privacy issues in online social networks
-__* Understand the influence of online social networks
+* Program with online social networks APIs
+* Understand dynamic properties of online social networks
+* Analyze privacy issues in online social networks
+* Understand the influence of online social networks
