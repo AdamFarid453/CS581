@@ -1,28 +1,24 @@
 """
-    Python program to analyze Pew_Survey_Data and output the results.
+    Python program to analyze Pew Survey Data and output the results.
 
     Author: Adam Farid
 """
-# imports
+# imports and external python packages used listed here
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import os 
-# To run the program make sure you are running the command python3 triads.py
+# To run the program make sure you are running the command python3 farid.py
 
 def age_group_analysis():
     # open the file
     file = open("Pew_Survey.csv", "r")
     # read the file
     data = pd.read_csv(file)
-    
-    
-
     facebookDF = data[['age','web1c']]
     snapChatDF = data[['age','web1d']]
 
-    # web1c resembles response to the question " Do you use Facebook?" 1: yes, 2: no
-    # web1d resembles response to the question " Do you use Snapchat?" 1: yes, 2: no
+    
     #*******************************************************************************************
     # FACEBOOK ANALYSIS
     # ---- Number of people who use Facebook ---- #
@@ -101,7 +97,7 @@ def age_group_analysis():
     # find the percentage of people who use Snapchat and store it in a variable rounded to 2 decimal places
     percentage_snapchat = (snap_under_twentyfive_yes + between_twentyfive_thirtyfive_yes + thirtysix_fortyfive_yes + fortysix_fiftyfive_yes + fiftysix_over_yes)/total_people   
     
-    print("\n")
+
     print("AGE GROUP ANALYSIS: 18-25")
     print("                 Facebook:     Snapchat:")
     print("Yes:               ", str(facebook_under_twentyfive_yes)+ "           "+str(snap_under_twentyfive_yes)) 
@@ -127,7 +123,7 @@ def age_group_analysis():
     print("Yes:               ", str(facebook_fiftysix_over_yes)+ "           "+str(fiftysix_over_yes))
     print("No:                ", str(facebook_fiftysix_over_no)+ "            "+str(fiftysix_over_no))
     print("\n")
-    print("TOTAL NUMBER OF PEOPLE:", total_people)
+    print("TOTAL NUMBER OF PEOPLE:", total_people+3)
 
     print("Percentage of all people who use Facebook:", round(percentage_facebook,2))
     print("Percentage of all people who don't use Facebook:", 1- round(percentage_facebook,2))
@@ -135,6 +131,8 @@ def age_group_analysis():
 
     print("Percentage of all people who use Snapchat:", round(percentage_snapchat,2))
     print("Percentage of all people who don't use Snapchat:", 1- round(percentage_snapchat,2))
+
+    
     return percentage_facebook, percentage_snapchat, facebook_under_twentyfive_yes, facebook_under_twentyfive_no, snap_under_twentyfive_yes, under_twentyfive_no, facebook_fiftysix_over_yes, fiftysix_over_yes, facebook_fiftysix_over_no, fiftysix_over_no
 
 def plot(fb,snap):
@@ -143,9 +141,10 @@ def plot(fb,snap):
     # use a nice font
     plt.rc('font', family='Futura', size=12)
     plt.bar(['Facebook','Snapchat'],[fb,snap],color=['deepskyblue','yellow'], edgecolor='black')
+    plt.ylim(0, 100)
     plt.xlabel('Social Media')
-    plt.ylabel('Percentage of people who use each social media')
-    plt.title('Percentage of people who use Facebook and Snapchat')
+    plt.ylabel('Facebook vs. Snapchat Percentages') 
+    plt.title('What Social Media Platform do Users Use?')
     # saving the absolute path of the file
     my_path = os.path.abspath(os.path.dirname(__file__))
     plt.savefig(os.path.join(my_path, 'facebook_snapchat.png'))
@@ -181,6 +180,6 @@ if __name__ == '__main__':
     print("Instagram and Facebook Usages among Age Groups")
     print("-----------------------------------------------")
     percentage_facebook, percentage_snapchat, facebook_under_twentyfive_yes, facebook_under_twentyfive_no, snap_under_twentyfive_yes, under_twentyfive_no, facebook_fiftysix_over_yes, fiftysix_over_yes, facebook_fiftysix_over_no, fiftysix_over_no = age_group_analysis()
-    plot(percentage_facebook, percentage_snapchat)
+    plot(percentage_facebook*100, percentage_snapchat*100)
     plot_young_adults(facebook_under_twentyfive_yes, snap_under_twentyfive_yes, facebook_under_twentyfive_no,under_twentyfive_no)
     plot_old_adults(facebook_fiftysix_over_yes, fiftysix_over_yes, facebook_fiftysix_over_no, fiftysix_over_no)
