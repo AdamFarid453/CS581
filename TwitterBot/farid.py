@@ -56,8 +56,8 @@ def main(input):
         print("Error: User has less than 5 tweets \n")
     tweetNumber=1
     for tweet in twitter_user.timeline()[0:5]:
-        print("TWEET " + str(tweetNumber) + ": " + tweet.text)
-        tweetNumber += 1
+        print("TWEET " + str(tweetNumber) + ": " + tweet.text) 
+        tweetNumber += 1 
         print("\n")
 
 # Python main method
@@ -67,11 +67,14 @@ if __name__ == '__main__':
     userInput = input("Enter a Twitter User Screen Name: ")
     while userInput != "STOP":
         # check for a valid twitter User Screen Name, and print an error message and ask again.
-        pattern = re.compile("^[a-zA-Z0-9_]{1,15}$")
-        if pattern.match(userInput) == None:
+        pattern = re.compile("^[a-zA-Z0-9_]{1,15}$") #regex for valid twitter User Screen Name
+        if pattern.match(userInput) == None: # if the user input does not match the regex, print an error message and ask again.
             print("Invalid Twitter User Screen Name.  Please try again.")
             userInput = input("Enter a Twitter User Screen Name: ")
-        main(userInput)
+            if userInput == "STOP":
+                print("\nThank you for using the Twitter Bot.  Have a nice day!")
+                exit()
+        main(userInput) 
         userInput = input("Enter a Twitter User Screen Name: ")
     print("\nThank you for using the Twitter Bot.  Have a nice day!")
     exit()
